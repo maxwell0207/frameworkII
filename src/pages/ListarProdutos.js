@@ -42,15 +42,6 @@ const ListarProdutos = () => {
       <Typography variant="h4" gutterBottom>
         Lista de Produtos
       </Typography>
-      <Button
-        variant="contained"
-        color="primary"
-        component={Link}
-        to="/adicionar"
-        sx={{ marginBottom: 2 }}
-      >
-        Adicionar Produto
-      </Button>
       <Grid container spacing={3}>
         {produtos.map((produto) => (
           <Grid item xs={12} sm={6} md={4} key={produto.id}>
