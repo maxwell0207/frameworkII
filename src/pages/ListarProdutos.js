@@ -1,6 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import api from '../services/api';
 import { Link } from 'react-router-dom';
+import {
+  Container,
+  Typography,
+  Button,
+  Card,
+  CardContent,
+  CardActions,
+  Grid,
+} from '@mui/material';
 
 const ListarProdutos = () => {
   const [produtos, setProdutos] = useState([]);
@@ -29,19 +38,50 @@ const ListarProdutos = () => {
   };
 
   return (
-    <div>
-      <h1>Lista de Produtos</h1>
-      <Link to="/adicionar">Adicionar Produto</Link>
-      <ul>
+    <Container sx={{ marginTop: 4 }}>
+      <Typography variant="h4" gutterBottom>
+        Lista de Produtos
+      </Typography>
+      <Button
+        variant="contained"
+        color="primary"
+        component={Link}
+        to="/adicionar"
+        sx={{ marginBottom: 2 }}
+      >
+        Adicionar Produto
+      </Button>
+      <Grid container spacing={3}>
         {produtos.map((produto) => (
-          <li key={produto.id}>
-            {produto.nome} - R${produto.preco}
-            <button onClick={() => handleDelete(produto.id)}>Excluir</button>
-            <Link to={`/editar/${produto.id}`}>Editar</Link>
-          </li>
+          <Grid item xs={12} sm={6} md={4} key={produto.id}>
+            <Card>
+              <CardContent>
+                <Typography variant="h6">{produto.nome}</Typography>
+                <Typography variant="body1" color="text.secondary">
+                  Preço: R${produto.preco}
+                </Typography>
+              </CardContent>
+              <CardActions>
+                <Button
+                  variant="contained"
+                  color="secondary"
+                  onClick={() => handleDelete(produto.id)}
+                >
+                  Excluir
+                </Button>
+                <Button
+                  variant="outlined"
+                  component={Link}
+                  to={`/editar/${produto.id}`}
+                >
+                  Editar
+                </Button>
+              </CardActions>
+            </Card>
+          </Grid>
         ))}
-      </ul>
-    </div>
+      </Grid>
+    </Container>
   );
 };
 
